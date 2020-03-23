@@ -1,0 +1,24 @@
+{
+  "name": "dnd",
+  "version": "1.0.0",
+  "description": "Package files for DnD project",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Linkm1993/DnD.git"
+  },
+  "author": "Matthew Link",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Linkm1993/DnD/issues"
+  },
+  "homepage": "https://github.com/Linkm1993/DnD#readme",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "d20": "^1.4.1",
+    "inquirer": "^7.1.0"
+  }
+}
