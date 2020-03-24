@@ -6,10 +6,15 @@ function abilityScoreRoll(){
     abilityRolls.push(score)
 }
 
-for (i = 0; i < 6; i++){
-    abilityScoreRoll()
+function rollingAS(){
+    for (i = 0; i < 6; i++){
+        abilityScoreRoll()
+    }
 }
+
+rollingAS()
 
 console.log(abilityRolls)
 
-module.exports = abilityScoreRoll()
+
+module.exports = rollingAS()
