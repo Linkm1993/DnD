@@ -1,7 +1,32 @@
 const inquirer = require('inquirer')
 
+function chooseRace(){
+    const races = [
+        {
+        type: 'list',
+        name: 'race',
+        message: 'Please select a race',
+        choices: [
+            'Dragonborn',
+            'Dwarf',
+            'Elf',
+            'Gnome',
+            'Half Elf',
+            'Half Orc',
+            'Halfling',
+            'Human',
+            'Tiefling'
+        ]
+    }
+    ]
+    inquirer.prompt(races).then(answers => {
+        console.log(JSON.stringify(answers, null, '  '));
+      });
+}
+
+
 function enterAbilityScores(){
-    const questions = [
+    const stats = [
         {
             type: 'input',
             name: 'STR',
@@ -37,10 +62,10 @@ function enterAbilityScores(){
         }
     ]
 
-    inquirer.prompt(questions).then(answers => {
+    inquirer.prompt(stats).then(answers => {
         console.log(JSON.stringify(answers, null, '  '));
       });
 }
 
-
+// module.exports = chooseRace()
 module.exports = enterAbilityScores()

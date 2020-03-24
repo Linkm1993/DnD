@@ -13,8 +13,7 @@ function rollingAS(){
 }
 
 rollingAS()
-
-console.log(abilityRolls)
+console.log(`Your ability score rolls [${abilityRolls}]`)
 
 
 module.exports = rollingAS()
