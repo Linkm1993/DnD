@@ -4,15 +4,15 @@ const axios = require('axios');
 axios.get(`http://www.dnd5eapi.co/api/`)
   .then(function (response) {
     // handle success
-    console.log(response);
+    // console.log(response);
 
   })
 
-
+//Going to have to cast race and class into lower case for api call
 
 function characterGen(){
     const questions = [
-        {
+    {
         type: 'list',
         name: 'race',
         message: 'Please select a race',
@@ -28,6 +28,26 @@ function characterGen(){
             'Tiefling'
         ]
     },
+    {
+        type: 'list',
+        name: 'class',
+        message: 'Please select a race',
+        choices: [
+            'Barbarian',
+            'Bard',
+            'Cleric',
+            'Druid',
+            'Fighter',
+            'Monk',
+            'Paladin',
+            'Ranger',
+            'Rogue',
+            'Sorcerer',
+            'Warlock',
+            'Wizard'
+        ]
+    },
+
     {
         type: 'input',
         name: 'STR',
