@@ -32,7 +32,7 @@ function characterGen(){
     {
         type: 'list',
         name: 'class',
-        message: 'Please select a race',
+        message: 'Please select a class',
         choices: [
             'Barbarian',
             'Bard',
