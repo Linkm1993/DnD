@@ -1,5 +1,6 @@
 const inquirer = require('inquirer')
 const axios = require('axios');
+let character = []
 
 axios.get(`http://www.dnd5eapi.co/api/`)
   .then(function (response) {
@@ -83,9 +84,12 @@ function characterGen(){
     }
     ]
     inquirer.prompt(questions).then(answers => {
-        console.log(JSON.stringify(answers, null, '  '));
+        // console.log(JSON.stringify(answers, null, '  '));
+        character.push(answers)
+        console.log(character)
       });
 }
 
 // module.exports = chooseRace()
 module.exports = characterGen()
+module.exports = character
