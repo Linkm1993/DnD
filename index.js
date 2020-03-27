@@ -5,7 +5,7 @@ const inquirer = require('inquirer')
 const axios = require('axios');
 
 //Character array that will be used to pass user inputs into fs write
-let character = []
+let character = {}
 
 
 //ability score array
@@ -105,13 +105,18 @@ function generateCharacter(){
     ]
     inquirer.prompt(questions).then(answers => {
         // console.log(JSON.stringify(answers, null, '  '));
-        character.push(answers)
+        character = answers
+        // console.log(character)
+        console.log(character.race)
+
+        // const race = character.STR
+        // console.log(race)
 
         //DND 5e API call
         axios.get(`http://www.dnd5eapi.co/api/`)
         .then(function (response) {
     // handle success
-    console.log(response.data);
+    // console.log(response.data);
 
   })
       });
