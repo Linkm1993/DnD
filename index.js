@@ -105,20 +105,21 @@ function generateCharacter(){
     ]
     inquirer.prompt(questions).then(answers => {
         // console.log(JSON.stringify(answers, null, '  '));
+
+        //Adding inquirer anwsers to character variable
         character = answers
-        // console.log(character)
-        console.log(character.race)
 
-        // const race = character.STR
-        // console.log(race)
+        //grabbing race value to pass into api call
+        let race = character.race.toLowerCase()
+        console.log(race)
 
-        //DND 5e API call
-        axios.get(`http://www.dnd5eapi.co/api/`)
+        //DND 5e API call for race
+        axios.get(`https://www.dnd5eapi.co/api/races/${race}`)
         .then(function (response) {
-    // handle success
-    // console.log(response.data);
+    
+            console.log(response.data);
 
-  })
+        })
       });
 }
 
