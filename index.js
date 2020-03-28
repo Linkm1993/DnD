@@ -42,8 +42,8 @@ function generateCharacter(){
             'Dwarf',
             'Elf',
             'Gnome',
-            'Half Elf',
-            'Half Orc',
+            'Half-Elf',
+            'Half-Orc',
             'Halfling',
             'Human',
             'Tiefling'
@@ -116,9 +116,28 @@ function generateCharacter(){
         //DND 5e API call for race
         axios.get(`https://www.dnd5eapi.co/api/races/${race}`)
         .then(function (response) {
-    
-            console.log(response.data);
+            // console.log(response.data.starting_proficiencies)
+            //array for traits
+            traits = []
+            //array for starting proficiencies
+            proficiencies = []
 
+            //for loop grabbing traits
+            for (i = 0; i<response.data.traits.length; i++ ){
+                traits.push(response.data.traits[i].name)
+
+            }
+
+            for (i = 0; i < response.data.starting_proficiencies.length; i++){
+                proficiencies.push(response.data.starting_proficiencies[i])
+            }
+            
+            //adding traits to character object
+            character.traits = traits
+            //adding starting profs to character object
+            character.proficiencies = proficiencies
+
+            console.log(character)
         })
       });
 }
