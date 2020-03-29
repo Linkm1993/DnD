@@ -33,6 +33,10 @@ console.log(`Your ability score rolls [${abilityRolls}]`)
 function generateCharacter(){
     const questions = [
     {
+        type: 'input',
+        name: 'charName',
+        message: "Enter your character's name",
+
         type: 'list',
         name: 'race',
         message: 'Please select a race',
@@ -120,6 +124,10 @@ function generateCharacter(){
             traits = []
             //array for starting proficiencies
             raceProficiencies = []
+            //array for race ability bonus
+            raceAbilityBonus = []
+
+            let charSpeed = response.data.speed
 
             //for loop grabbing trait names
             for (i = 0; i<response.data.traits.length; i++ ){
@@ -131,17 +139,34 @@ function generateCharacter(){
             for (i = 0; i < response.data.starting_proficiencies.length; i++){
                 raceProficiencies.push(response.data.starting_proficiencies[i].name)
             }
+            //grabbing race abilitie bonus
+            for (i = 0; i < response.data.ability_bonuses.length; i++){
+                raceAbilityBonus.push(`${response.data.ability_bonuses[i].name}: ${response.data.ability_bonuses[i].bonus}`)
+            }
             
+            //addig speed
+            character.speed = charSpeed
             //adding traits to character object
             character.traits = traits
             //adding starting profs to character object
             character.raceProficiencies = raceProficiencies
+            //adding racial ability bous to character object
+            character.raceAbilityBonus = raceAbilityBonus
 
             axios.get(`https://www.dnd5eapi.co/api/classes/${userClass}`)
             .then(function (classResponse) {
                 // console.log(classResponse.data)
-                console.log(character)
-                let hitDice = `d${classResponse.hit_die}`
+                //Setting class hitdice, saving throws
+                let hitDice = `d${classResponse.data.hit_die}`
+                let savingThrows = []
+                //Grabbig the saving throws for specified class
+                for (i = 0; i < classResponse.data.saving_throws.length; i++){
+                    let grabSaving = classResponse.data.saving_throws[i].name
+                    savingThrows.push(grabSaving)
+                }
+
+                character.hitdice = hitDice
+                character.savingThrows = savingThrows
             })
         })
       });
