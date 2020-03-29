@@ -5,7 +5,6 @@ const inquirer = require('inquirer')
 const axios = require('axios');
 
 //Character array that will be used to pass user inputs into fs write
-let character = {}
 
 
 //ability score array
@@ -111,7 +110,7 @@ function generateCharacter(){
 
         //grabbing race value to pass into api call
         let race = character.race.toLowerCase()
-        console.log(race)
+        let userClass = character.class.toLowerCase()
 
         //DND 5e API call for race
         axios.get(`https://www.dnd5eapi.co/api/races/${race}`)
@@ -120,24 +119,30 @@ function generateCharacter(){
             //array for traits
             traits = []
             //array for starting proficiencies
-            proficiencies = []
+            raceProficiencies = []
 
-            //for loop grabbing traits
+            //for loop grabbing trait names
             for (i = 0; i<response.data.traits.length; i++ ){
                 traits.push(response.data.traits[i].name)
 
             }
 
+            //grabbing prof names
             for (i = 0; i < response.data.starting_proficiencies.length; i++){
-                proficiencies.push(response.data.starting_proficiencies[i])
+                raceProficiencies.push(response.data.starting_proficiencies[i].name)
             }
             
             //adding traits to character object
             character.traits = traits
             //adding starting profs to character object
-            character.proficiencies = proficiencies
+            character.raceProficiencies = raceProficiencies
 
-            console.log(character)
+            axios.get(`https://www.dnd5eapi.co/api/classes/${userClass}`)
+            .then(function (classResponse) {
+                // console.log(classResponse.data)
+                console.log(character)
+                let hitDice = `d${classResponse.hit_die}`
+            })
         })
       });
 }
