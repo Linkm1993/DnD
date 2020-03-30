@@ -3,6 +3,7 @@ const fs = require('fs')
 const d20 = require('d20');
 const inquirer = require('inquirer')
 const axios = require('axios');
+let character = {}
 
 //Character array that will be used to pass user inputs into fs write
 
@@ -168,7 +169,57 @@ function generateCharacter(){
                 character.hitdice = hitDice
                 character.savingThrows = savingThrows
             })
-        })
+            //setting a empty string to be modified based on the user's class to make the equipment api call
+                let equimentNumber = ""
+                function findEquipNumber(){
+                    if (userClass === 'barbarian'){
+                        equimentNumber = "1"
+                    }
+                    else if (userClass === "bard"){
+                        equimentNumber = "2"
+                    }
+                    else if (userClass === "cleric"){
+                        equimentNumber = "3"
+                    }
+                    else if (userClass === "druid"){
+                        equimentNumber = "4"
+                    }
+                    else if (userClass === "fighter"){
+                        equimentNumber = "5"
+                    }
+                    else if (userClass === "monk"){
+                        equimentNumber = "6"
+                    }
+                    else if (userClass === "paladin"){
+                        equimentNumber = "7"
+                    }
+                    else if (userClass === "ranger"){
+                        equimentNumber = "8"
+                    }
+                    else if (userClass === "rogue"){
+                        equimentNumber = "9"
+                    }
+                    else if (userClass === "sorcerer"){
+                        equimentNumber = "10"
+                    }
+                    else if (userClass === "warlock"){
+                        equimentNumber = "11"
+                    }
+                    else{
+                        equimentNumber ="12"
+                    }
+                }
+            
+                findEquipNumber()
+
+                //axios call for starting equipment
+                axios.get(`https://www.dnd5eapi.co/api/starting-equipment/${equimentNumber}`)
+                .then(function (equipResponse) {
+                    console.log(equipResponse)
+                    console.log(character)
+                })
+
+            })
       });
 }
 
