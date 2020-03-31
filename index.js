@@ -37,8 +37,8 @@ function generateCharacter(){
         type: 'input',
         name: 'charName',
         message: "Enter your character's name",
-
-        type: 'list',
+    },
+    {  type: 'list',
         name: 'race',
         message: 'Please select a race',
         choices: [
@@ -215,7 +215,13 @@ function generateCharacter(){
                 //axios call for starting equipment
                 axios.get(`https://www.dnd5eapi.co/api/starting-equipment/${equimentNumber}`)
                 .then(function (equipResponse) {
-                    console.log(equipResponse)
+                    // console.log(equipResponse.data)
+                    let startingEquipment = []
+                    for (i =0; i <  equipResponse.data.starting_equipment.length; i++){
+
+                        startingEquipment.push(JSON.stringify(equipResponse.data.starting_equipment[i].item.name))
+                    }
+                    character.startingEquipment = startingEquipment
                     console.log(character)
                 })
 
