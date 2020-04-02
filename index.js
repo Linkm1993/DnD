@@ -28,7 +28,7 @@ function rollingAS(){
 rollingAS()
 
 //displaying the user's rolls to the console so they can enter them
-console.log(`Your ability score rolls [${abilityRolls}]`)
+console.log(`Your ability score rolls are [${abilityRolls}]`)
 
 //Grabs desired race, class, and stat values and then pushes them to the character array
 function generateCharacter(){
@@ -127,8 +127,13 @@ function generateCharacter(){
             raceProficiencies = []
             //array for race ability bonus
             raceAbilityBonus = []
+            //selected Traits
+            selectedTraits = []
 
             let charSpeed = response.data.speed
+
+            // console.log(response.data.trait_options)
+
 
             //for loop grabbing trait names
             for (i = 0; i<response.data.traits.length; i++ ){
@@ -160,6 +165,7 @@ function generateCharacter(){
                 //Setting class hitdice, saving throws
                 let hitDice = `d${classResponse.data.hit_die}`
                 let savingThrows = []
+
                 //Grabbig the saving throws for specified class
                 for (i = 0; i < classResponse.data.saving_throws.length; i++){
                     let grabSaving = classResponse.data.saving_throws[i].name
@@ -169,8 +175,10 @@ function generateCharacter(){
                 character.hitdice = hitDice
                 character.savingThrows = savingThrows
             })
+
             //setting a empty string to be modified based on the user's class to make the equipment api call
                 let equimentNumber = ""
+                let equipChoices = []
                 function findEquipNumber(){
                     if (userClass === 'barbarian'){
                         equimentNumber = "1"
@@ -222,6 +230,77 @@ function generateCharacter(){
                         startingEquipment.push(JSON.stringify(equipResponse.data.starting_equipment[i].item.name))
                     }
                     character.startingEquipment = startingEquipment
+
+                    function getEquipChoices(){
+                        if (equimentNumber === 1){
+                            equipChoices.push(equipResponse.data.choice_1)
+                            equipChoices.push(equipResponse.data.choice_2)
+                        }
+                        else if (equimentNumber === 2){
+                            equipChoices.push(equipResponse.data.choice_1)
+                            equipChoices.push(equipResponse.data.choice_2)
+                            equipChoices.push(equipResponse.data.choice_3)
+
+                        }
+                        else if (equimentNumber === 3){
+                            equipChoices.push(equipResponse.data.choice_1)
+                            equipChoices.push(equipResponse.data.choice_2)
+                            equipChoices.push(equipResponse.data.choice_3)
+                            equipChoices.push(equipResponse.data.choice_4)
+                            equipChoices.push(equipResponse.data.choice_5)
+                        }
+                        else if( equimentNumber === 4){
+                            equipChoices.push(equipResponse.data.choice_1)
+                            equipChoices.push(equipResponse.data.choice_2)
+                            equipChoices.push(equipResponse.data.choice_3)
+                        }
+                        else if (equimentNumber === 5){
+                            equipChoices.push(equipResponse.data.choice_1)
+                            equipChoices.push(equipResponse.data.choice_2)
+                            equipChoices.push(equipResponse.data.choice_3)
+                            equipChoices.push(equipResponse.data.choice_4)
+                            equipChoices.push(equipResponse.data.choice_5)
+                        }
+                        else if (equimentNumber === 6){
+                            equipChoices.push(equipResponse.data.choice_1)
+                            equipChoices.push(equipResponse.data.choice_2)
+                        }
+                        else if(equimentNumber === 7){
+                            equipChoices.push(equipResponse.data.choice_1)
+                            equipChoices.push(equipResponse.data.choice_2)
+                            equipChoices.push(equipResponse.data.choice_3)
+                            equipChoices.push(equipResponse.data.choice_4)
+                            equipChoices.push(equipResponse.data.choice_5)
+                        }
+                        else if( equimentNumber === 8){
+                            equipChoices.push(equipResponse.data.choice_1)
+                            equipChoices.push(equipResponse.data.choice_2)
+                            equipChoices.push(equipResponse.data.choice_3)
+                        }
+                        else if (equimentNumber === 9){
+                            equipChoices.push(equipResponse.data.choice_1)
+                            equipChoices.push(equipResponse.data.choice_2)
+                            equipChoices.push(equipResponse.data.choice_3)
+                        }
+                        else if (equimentNumber === 10){
+                            equipChoices.push(equipResponse.data.choice_1)
+                            equipChoices.push(equipResponse.data.choice_2)
+                            equipChoices.push(equipResponse.data.choice_3)
+                        }
+                        else if (equimentNumber === 11){
+                            equipChoices.push(equipResponse.data.choice_1)
+                            equipChoices.push(equipResponse.data.choice_2)
+                            equipChoices.push(equipResponse.data.choice_3)
+                            equipChoices.push(equipResponse.data.choice_4)
+                        }
+                        else{
+                            equipChoices.push(equipResponse.data.choice_1)
+                            equipChoices.push(equipResponse.data.choice_2)
+                            equipChoices.push(equipResponse.data.choice_3)
+                        }
+                    }
+                    getEquipChoices()
+                    console.log(equipChoices)
                     console.log(character)
                 })
 
