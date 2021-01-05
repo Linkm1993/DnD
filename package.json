@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/Linkm1993/DnD#readme",
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "chalk-pipe": "^3.0.0",
     "d20": "^1.4.1",
     "inquirer": "^7.1.0",
